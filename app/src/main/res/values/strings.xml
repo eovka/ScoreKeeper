@@ -1,0 +1,21 @@
+<resources>
+    <string name="app_name">Score Keeper</string>
+    <string name="date_hint">Enter the date&#8230;</string>
+    <string name="team_a_name_hint">Team A&#8230;</string>
+    <string name="team_b_name_hint">Team B&#8230;</string>
+    <string name="initial_score">0</string>
+    <string name="goal">Goal</string>
+    <string name="red_card">Red card</string>
+    <string name="yellow_card">Yellow card</string>
+    <string name="send_mail">Send e-mail</string>
+    <string name="reset">Reset</string>
+    <string name="reset_warning">You really want to reset score? Click once again.</string>
+    <string name="email_subject">soccer match result</string>
+    <string name="versus">&#160;vs&#160;</string>
+    <string name="emdash">&#160;&#8213;&#160;</string>
+    <string name="red_cards_info">Red cards for&#160;</string>
+    <string name="yellow_cards_info">Yellow cards for&#160;</string>
+    <string name="match_time_info">The game took place&#160;</string>
+    <string name="team_a">Team A</string>
+    <string name="team_b">Team B</string>
+</resources>

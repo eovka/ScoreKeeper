@@ -1,0 +1,15 @@
+<resources>
+    <dimen name="line_size">2dp</dimen>
+    <dimen name="little_space">8dp</dimen>
+    <dimen name="normal_space">12dp</dimen>
+    <dimen name="bigger_space">16dp</dimen>
+    <dimen name="double_space">24dp</dimen>
+    <dimen name="lot_of_space">32dp</dimen>
+    <dimen name="button_height">48dp</dimen>
+    <dimen name="goal_button_height">60dp</dimen>
+    <dimen name="button_smaller_text">12sp</dimen>
+    <dimen name="button_bigger_text">16sp</dimen>
+    <dimen name="edit_text">18sp</dimen>
+    <dimen name="biggest_text">24sp</dimen>
+    <dimen name="main_score">48sp</dimen>
+</resources>

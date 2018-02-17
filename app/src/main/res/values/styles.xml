@@ -1,0 +1,107 @@
+<resources>
+
+    <style name="AppTheme" parent="Theme.AppCompat.Light.NoActionBar">
+        <item name="colorPrimary">@color/colorPrimary</item>
+        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
+        <item name="colorAccent">@color/colorAccent</item>
+        <item name="colorButtonNormal">@color/colorButton</item>
+        <item name="android:fontFamily">sans-serif</item>
+        <item name="android:textColor">@color/colorTextLight</item>
+    </style>
+
+    <style name="TeamsLayout">
+        <item name="android:layout_width">0dp</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_weight">1</item>
+        <item name="android:orientation">vertical</item>
+    </style>
+
+    <style name="EditFields">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:imeOptions">actionDone</item>
+        <item name="android:singleLine">true</item>
+        <item name="android:textColorHint">@color/colorHint</item>
+        <item name="android:textSize">@dimen/edit_text</item>
+        <item name="android:textColor">@color/colorTextLight</item>
+    </style>
+
+    <style name="EditFields.TeamsName">
+        <item name="android:gravity">center_horizontal</item>
+        <item name="android:inputType">textCapWords</item>
+        <item name="android:padding">@dimen/normal_space</item>
+        <item name="android:background">@color/yellowButtonText</item>
+    </style>
+
+    <style name="GoalScore">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:gravity">center_horizontal</item>
+        <item name="android:paddingBottom">@dimen/little_space</item>
+        <item name="android:text">@string/initial_score</item>
+        <item name="android:textSize">@dimen/main_score</item>
+    </style>
+
+    <style name="ButtonsGoal">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">@dimen/goal_button_height</item>
+        <item name="android:layout_marginBottom">@dimen/double_space</item>
+        <item name="android:layout_marginLeft">@dimen/double_space</item>
+        <item name="android:layout_marginRight">@dimen/double_space</item>
+        <item name="android:text">@string/goal</item>
+        <item name="android:textSize">@dimen/biggest_text</item>
+    </style>
+
+    <style name="CardsLayout">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_gravity">center</item>
+        <item name="android:orientation">horizontal</item>
+    </style>
+
+    <style name="CardsScore">
+        <item name="android:text">@string/initial_score</item>
+        <item name="android:textSize">@dimen/biggest_text</item>
+        <item name="android:paddingTop">@dimen/little_space</item>
+        <item name="android:layout_weight">1</item>
+        <item name="android:layout_width">0dp</item>
+        <item name="android:layout_height">wrap_content</item>
+    </style>
+
+    <style name="CardsScore.Left">
+        <item name="android:paddingRight">@dimen/lot_of_space</item>
+        <item name="android:gravity">end</item>
+    </style>
+
+    <style name="CardsScore.Right">
+        <item name="android:paddingLeft">@dimen/lot_of_space</item>
+        <item name="android:gravity">start</item>
+    </style>
+
+    <style name="ButtonsSmaller">
+        <item name="android:layout_marginBottom">@dimen/double_space</item>
+        <item name="android:paddingLeft">@dimen/little_space</item>
+        <item name="android:paddingRight">@dimen/little_space</item>
+        <item name="android:textSize">@dimen/button_smaller_text</item>
+        <item name="android:layout_height">@dimen/button_height</item>
+        <item name="android:layout_weight">1</item>
+        <item name="android:layout_width">0dp</item>
+    </style>
+
+    <style name="ButtonsSmaller.Left">
+        <item name="android:layout_marginLeft">@dimen/double_space</item>
+        <item name="android:layout_gravity">start</item>
+    </style>
+
+    <style name="ButtonsSmaller.Right">
+        <item name="android:layout_marginRight">@dimen/double_space</item>
+        <item name="android:layout_gravity">end</item>
+    </style>
+
+    <style name="ButtonsGreenSmaller">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">@dimen/button_height</item>
+        <item name="android:layout_centerHorizontal">true</item>
+        <item name="android:textSize">@dimen/button_bigger_text</item>
+    </style>
+</resources>
