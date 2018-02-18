@@ -103,6 +103,9 @@ public class MainActivity extends AppCompatActivity {
             redTeamB.setText(savedRedB);
         }
 
+        // The below code which sets the current date and allows to pick another date written with help:
+        // http://www.moo-code.me/en/2017/04/16/how-to-popup-datepicker-calendar/
+
         // calendar on create - set date to current date
         long currentdate = System.currentTimeMillis();
         String dateString = sdf.format(currentdate);
@@ -123,7 +126,6 @@ public class MainActivity extends AppCompatActivity {
 
         // when dateField clicked, calendar shows up
         dateField.setOnClickListener(new View.OnClickListener() {
-
             @Override
             public void onClick(View v) {
                 new DatePickerDialog(context, date, myCalendar
@@ -132,7 +134,7 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-        //the keyboard doesn't show up just after launching the app
+        // the keyboard doesn't show up just after launching the app
         this.getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN);
     }
 
