@@ -3,10 +3,6 @@ package com.example.android.scorekeeper;
 import android.app.DatePickerDialog;
 import android.content.Context;
 import android.content.Intent;
-import java.text.SimpleDateFormat;
-import java.util.Calendar;
-import java.util.Locale;
-
 import android.media.MediaPlayer;
 import android.net.Uri;
 import android.support.v7.app.AppCompatActivity;
@@ -18,6 +14,10 @@ import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import java.util.Locale;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
 
 public class MainActivity extends AppCompatActivity {
     int scoreA = 0;
@@ -57,6 +57,7 @@ public class MainActivity extends AppCompatActivity {
     private static String YELLOW_B = "yellowB";
     private static String RED_B = "redB";
 
+    boolean resetClick = false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -81,6 +82,8 @@ public class MainActivity extends AppCompatActivity {
         scoreTeamB = findViewById(R.id.team_b_score);
         yellowTeamB = findViewById(R.id.team_b_yellowcards);
         redTeamB = findViewById(R.id.team_b_redcards);
+
+        // find all the sounds to play
         soundGoal = MediaPlayer.create(this, R.raw.goalsound);
         soundYellow = MediaPlayer.create(this, R.raw.shortwhistle);
         soundRed = MediaPlayer.create(this, R.raw.refereewhistle);
@@ -128,6 +131,8 @@ public class MainActivity extends AppCompatActivity {
                         myCalendar.get(Calendar.DAY_OF_MONTH)).show();
             }
         });
+
+        //the keyboard doesn't show up just after launching the app
         this.getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN);
     }
 
@@ -309,7 +314,6 @@ public class MainActivity extends AppCompatActivity {
         matchSummary += "\n" + getString(R.string.match_time_info) + date + ".";
         return matchSummary;
     }
-    boolean resetClick = false;
 
     public void resetScore(View v) {
         Button resetButton = findViewById(R.id.reset_button);

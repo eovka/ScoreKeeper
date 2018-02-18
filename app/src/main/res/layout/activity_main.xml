@@ -2,13 +2,12 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-
     tools:context="com.example.android.scorekeeper.MainActivity">
 
     <RelativeLayout
-        android:background="@drawable/soccer_field_photo"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:background="@drawable/soccer_field_photo">
 
         <EditText
             android:id="@+id/date"
@@ -138,8 +137,8 @@
             style="@style/ButtonsGreenSmaller"
             android:layout_below="@id/send_email_button"
             android:layout_marginBottom="@dimen/double_space"
+            android:background="@color/colorAccent"
             android:onClick="resetScore"
-            android:text="@string/reset"
-            android:background="@color/colorAccent"/>
+            android:text="@string/reset" />
     </RelativeLayout>
 </ScrollView>
