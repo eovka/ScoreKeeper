@@ -20,12 +20,12 @@ import java.text.SimpleDateFormat;
 import java.util.Calendar;
 
 public class MainActivity extends AppCompatActivity {
-    int scoreA = 0;
-    int yellowCardsForA = 0;
-    int redCardsForA = 0;
-    int scoreB = 0;
-    int yellowCardsForB = 0;
-    int redCardsForB = 0;
+    private int scoreA = 0;
+    private int yellowCardsForA = 0;
+    private int redCardsForA = 0;
+    private int scoreB = 0;
+    private int yellowCardsForB = 0;
+    private int redCardsForB = 0;
 
     // all needed to set the date
     Context context = this;
