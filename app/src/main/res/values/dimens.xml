@@ -1,4 +1,5 @@
 <resources>
+    <dimen name="view_dp">0dp</dimen>
     <dimen name="line_size">2dp</dimen>
     <dimen name="little_space">8dp</dimen>
     <dimen name="normal_space">12dp</dimen>
