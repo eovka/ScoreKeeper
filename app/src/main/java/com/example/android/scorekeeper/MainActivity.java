@@ -172,16 +172,16 @@ public class MainActivity extends AppCompatActivity {
      */
     public void addGoal(View v){
         soundGoal.start();
-        String goalsA = scoreTeamA.getText().toString();
-        scoreA = Integer.parseInt(goalsA);
-        String goalsB = scoreTeamB.getText().toString();
-        scoreB = Integer.parseInt(goalsB);
         switch (v.getId()) {
             case R.id.goalA_button:
+                String goalsA = scoreTeamA.getText().toString();
+                scoreA = Integer.parseInt(goalsA);
                 scoreA += 1;
                 displayScoreForA(scoreA);
                 break;
             case R.id.goalB_button:
+                String goalsB = scoreTeamB.getText().toString();
+                scoreB = Integer.parseInt(goalsB);
                 scoreB += 1;
                 displayScoreForB(scoreB);
                 break;
