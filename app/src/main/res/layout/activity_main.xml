@@ -2,12 +2,12 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@drawable/soccer_field_photo_2"
     tools:context="com.example.android.scorekeeper.MainActivity">
 
     <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="@drawable/soccer_field_photo">
+        android:layout_height="wrap_content">
 
         <EditText
             android:id="@+id/date"
