@@ -304,16 +304,18 @@ public class MainActivity extends AppCompatActivity {
      * This method creates match summary.
      */
     private String createMatchSummary(String date, String nameA, String nameB, String goalsA, String goalsB, String redCardsA, String yellowCardsA, String redCardsB, String yellowCardsB) {
-        String matchSummary = nameA + getString(R.string.emdash) + nameB;
-        matchSummary += "\n" + goalsA + getString(R.string.emdash) + goalsB;
-        matchSummary += "\n";
-        matchSummary += "\n" + getString(R.string.red_cards_info) + nameA + ": " + redCardsA;
-        matchSummary += "\n" + getString(R.string.yellow_cards_info) + nameA + ": " + yellowCardsA;
-        matchSummary += "\n";
-        matchSummary += "\n" + getString(R.string.red_cards_info) + nameB + ": " + redCardsB;
-        matchSummary += "\n" + getString(R.string.yellow_cards_info) + nameB + ": " + yellowCardsB;
-        matchSummary += "\n";
-        matchSummary += "\n" + getString(R.string.match_time_info) + date + ".";
+        StringBuilder summary = new StringBuilder();
+        summary.append(nameA).append(getString(R.string.emdash)).append(nameB);
+        summary.append("\n").append(goalsA).append(getString(R.string.emdash)).append(goalsB);
+        summary.append("\n");
+        summary.append("\n").append(getString(R.string.red_cards_info)).append(nameA).append(": ").append(redCardsA);
+        summary.append("\n").append(getString(R.string.yellow_cards_info)).append(nameA).append(": ").append(yellowCardsA);
+        summary.append("\n");
+        summary.append("\n").append(getString(R.string.red_cards_info)).append(nameB).append(": ").append(redCardsB);
+        summary.append("\n").append(getString(R.string.yellow_cards_info)).append(nameB).append(": ").append(yellowCardsB);
+        summary.append("\n");
+        summary.append("\n").append(getString(R.string.match_time_info)).append(date).append(".");
+        String matchSummary = summary.toString();
         return matchSummary;
     }
 
