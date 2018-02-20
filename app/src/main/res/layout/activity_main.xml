@@ -39,7 +39,7 @@
                 <Button
                     android:id="@+id/goalA_button"
                     style="@style/ButtonsGoal"
-                    android:onClick="addGoalForA" />
+                    android:onClick="addGoal" />
 
                 <LinearLayout style="@style/CardsLayout">
 
@@ -91,7 +91,7 @@
                 <Button
                     android:id="@+id/goalB_button"
                     style="@style/ButtonsGoal"
-                    android:onClick="addGoalForB" />
+                    android:onClick="addGoal" />
 
                 <LinearLayout style="@style/CardsLayout">
 

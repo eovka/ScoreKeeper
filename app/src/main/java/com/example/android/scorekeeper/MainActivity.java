@@ -170,14 +170,22 @@ public class MainActivity extends AppCompatActivity {
     /**
      * Below methods add goals to score and cards to cards counter.
      */
-    public void addGoalForA(View v) {
+    public void addGoal(View v){
         soundGoal.start();
-        // checks the number of goals after rotation (saved in a string) and changes it back to integer
         String goalsA = scoreTeamA.getText().toString();
         scoreA = Integer.parseInt(goalsA);
-        // adds goals to score
-        scoreA += 1;
-        displayScoreForA(scoreA);
+        String goalsB = scoreTeamB.getText().toString();
+        scoreB = Integer.parseInt(goalsB);
+        switch (v.getId()) {
+            case R.id.goalA_button:
+                scoreA += 1;
+                displayScoreForA(scoreA);
+                break;
+            case R.id.goalB_button:
+                scoreB += 1;
+                displayScoreForB(scoreB);
+                break;
+        }
     }
 
     public void addYellowCardForA(View v) {
@@ -194,14 +202,6 @@ public class MainActivity extends AppCompatActivity {
         redCardsForA = Integer.parseInt(redCardsA);
         redCardsForA += 1;
         displayRedCardsForA(redCardsForA);
-    }
-
-    public void addGoalForB(View v) {
-        soundGoal.start();
-        String goalsB = scoreTeamB.getText().toString();
-        scoreB = Integer.parseInt(goalsB);
-        scoreB += 1;
-        displayScoreForB(scoreB);
     }
 
     public void addYellowCardForB(View v) {
