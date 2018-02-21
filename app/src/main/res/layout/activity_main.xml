@@ -47,7 +47,7 @@
                         android:id="@+id/yellowA_button"
                         style="@style/ButtonsSmaller.Left"
                         android:background="@color/yellowButton"
-                        android:onClick="addYellowCardForA"
+                        android:onClick="addYellowCard"
                         android:text="@string/yellow_card"
                         android:textColor="@color/yellowButtonText" />
 
@@ -62,7 +62,7 @@
                         android:id="@+id/redA_button"
                         style="@style/ButtonsSmaller.Left"
                         android:background="@color/redButton"
-                        android:onClick="addRedCardForA"
+                        android:onClick="addRedCard"
                         android:text="@string/red_card" />
 
                     <TextView
@@ -103,7 +103,7 @@
                         android:id="@+id/yellowB_button"
                         style="@style/ButtonsSmaller.Right"
                         android:background="@color/yellowButton"
-                        android:onClick="addYellowCardForB"
+                        android:onClick="addYellowCard"
                         android:text="@string/yellow_card"
                         android:textColor="@color/yellowButtonText" />
                 </LinearLayout>
@@ -118,7 +118,7 @@
                         android:id="@+id/redB_button"
                         style="@style/ButtonsSmaller.Right"
                         android:background="@color/redButton"
-                        android:onClick="addRedCardForB"
+                        android:onClick="addRedCard"
                         android:text="@string/red_card" />
                 </LinearLayout>
             </LinearLayout>

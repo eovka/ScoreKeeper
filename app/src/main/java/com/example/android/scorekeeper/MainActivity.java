@@ -188,36 +188,40 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
-    public void addYellowCardForA(View v) {
+    public void addYellowCard(View v) {
         soundYellow.start();
-        String yellowCardsA = yellowTeamA.getText().toString();
-        yellowCardsForA = Integer.parseInt(yellowCardsA);
-        yellowCardsForA += 1;
-        displayYellowCardsForA(yellowCardsForA);
+        switch (v.getId()) {
+            case R.id.yellowA_button:
+                String yellowCardsA = yellowTeamA.getText().toString();
+                yellowCardsForA = Integer.parseInt(yellowCardsA);
+                yellowCardsForA += 1;
+                displayYellowCardsForA(yellowCardsForA);
+                break;
+            case R.id.yellowB_button:
+                String yellowCardsB = yellowTeamB.getText().toString();
+                yellowCardsForB = Integer.parseInt(yellowCardsB);
+                yellowCardsForB += 1;
+                displayYellowCardsForB(yellowCardsForB);
+                break;
+        }
     }
 
-    public void addRedCardForA(View v) {
+    public void addRedCard(View v) {
         soundRed.start();
-        String redCardsA = redTeamA.getText().toString();
-        redCardsForA = Integer.parseInt(redCardsA);
-        redCardsForA += 1;
-        displayRedCardsForA(redCardsForA);
-    }
-
-    public void addYellowCardForB(View v) {
-        soundYellow.start();
-        String yellowCardsB = yellowTeamB.getText().toString();
-        yellowCardsForB = Integer.parseInt(yellowCardsB);
-        yellowCardsForB += 1;
-        displayYellowCardsForB(yellowCardsForB);
-    }
-
-    public void addRedCardForB(View v) {
-        soundRed.start();
-        String redCardsB = redTeamB.getText().toString();
-        redCardsForB = Integer.parseInt(redCardsB);
-        redCardsForB += 1;
-        displayRedCardsForB(redCardsForB);
+        switch (v.getId()) {
+            case R.id.redA_button:
+                String redCardsA = redTeamA.getText().toString();
+                redCardsForA = Integer.parseInt(redCardsA);
+                redCardsForA += 1;
+                displayRedCardsForA(redCardsForA);
+                break;
+            case R.id.redB_button:
+                String redCardsB = redTeamB.getText().toString();
+                redCardsForB = Integer.parseInt(redCardsB);
+                redCardsForB += 1;
+                displayRedCardsForB(redCardsForB);
+                break;
+        }
     }
 
     /**
