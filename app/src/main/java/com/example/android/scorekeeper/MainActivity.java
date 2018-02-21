@@ -170,54 +170,54 @@ public class MainActivity extends AppCompatActivity {
     /**
      * Below methods add goals to score and cards to cards counter.
      */
-    public void addGoalForA(View v) {
+    public void addGoal(View v) {
         soundGoal.start();
-        // checks the number of goals after rotation (saved in a string) and changes it back to integer
-        String goalsA = scoreTeamA.getText().toString();
-        scoreA = Integer.parseInt(goalsA);
-        // adds goals to score
-        scoreA += 1;
-        displayScoreForA(scoreA);
+        String teamName = v.getTag().toString();
+        if (teamName.equals(getString(R.string.team_a))) {
+            // checks the number of goals after rotation (saved in a string) and changes it back to integer
+            String goalsA = scoreTeamA.getText().toString();
+            scoreA = Integer.parseInt(goalsA);
+            // adds goals to score
+            scoreA += 1;
+            displayScoreForA(scoreA);
+        } else {
+            String goalsB = scoreTeamB.getText().toString();
+            scoreB = Integer.parseInt(goalsB);
+            scoreB += 1;
+            displayScoreForB(scoreB);
+        }
     }
 
-    public void addYellowCardForA(View v) {
+    public void addYellowCard(View v) {
         soundYellow.start();
-        String yellowCardsA = yellowTeamA.getText().toString();
-        yellowCardsForA = Integer.parseInt(yellowCardsA);
-        yellowCardsForA += 1;
-        displayYellowCardsForA(yellowCardsForA);
+        String teamName = v.getTag().toString();
+        if (teamName.equals(getString(R.string.team_a))) {
+            String yellowCardsA = yellowTeamA.getText().toString();
+            yellowCardsForA = Integer.parseInt(yellowCardsA);
+            yellowCardsForA += 1;
+            displayYellowCardsForA(yellowCardsForA);
+        } else {
+            String yellowCardsB = yellowTeamB.getText().toString();
+            yellowCardsForB = Integer.parseInt(yellowCardsB);
+            yellowCardsForB += 1;
+            displayYellowCardsForB(yellowCardsForB);
+        }
     }
 
-    public void addRedCardForA(View v) {
+    public void addRedCard(View v) {
         soundRed.start();
-        String redCardsA = redTeamA.getText().toString();
-        redCardsForA = Integer.parseInt(redCardsA);
-        redCardsForA += 1;
-        displayRedCardsForA(redCardsForA);
-    }
-
-    public void addGoalForB(View v) {
-        soundGoal.start();
-        String goalsB = scoreTeamB.getText().toString();
-        scoreB = Integer.parseInt(goalsB);
-        scoreB += 1;
-        displayScoreForB(scoreB);
-    }
-
-    public void addYellowCardForB(View v) {
-        soundYellow.start();
-        String yellowCardsB = yellowTeamB.getText().toString();
-        yellowCardsForB = Integer.parseInt(yellowCardsB);
-        yellowCardsForB += 1;
-        displayYellowCardsForB(yellowCardsForB);
-    }
-
-    public void addRedCardForB(View v) {
-        soundRed.start();
-        String redCardsB = redTeamB.getText().toString();
-        redCardsForB = Integer.parseInt(redCardsB);
-        redCardsForB += 1;
-        displayRedCardsForB(redCardsForB);
+        String teamName = v.getTag().toString();
+        if (teamName.equals(getString(R.string.team_a))) {
+            String redCardsA = redTeamA.getText().toString();
+            redCardsForA = Integer.parseInt(redCardsA);
+            redCardsForA += 1;
+            displayRedCardsForA(redCardsForA);
+        } else {
+            String redCardsB = redTeamB.getText().toString();
+            redCardsForB = Integer.parseInt(redCardsB);
+            redCardsForB += 1;
+            displayRedCardsForB(redCardsForB);
+        }
     }
 
     /**
