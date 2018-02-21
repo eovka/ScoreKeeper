@@ -28,27 +28,27 @@ public class MainActivity extends AppCompatActivity {
     private int redCardsForB = 0;
 
     // all needed to set the date
-    private Context context = this;
-    private EditText dateField;
-    private Calendar myCalendar = Calendar.getInstance();
-    private String dateFormat = "dd.MM.yyyy";
-    private DatePickerDialog.OnDateSetListener date;
-    private SimpleDateFormat sdf = new SimpleDateFormat(dateFormat, Locale.GERMAN);
+    Context context = this;
+    EditText dateField;
+    Calendar myCalendar = Calendar.getInstance();
+    String dateFormat = "dd.MM.yyyy";
+    DatePickerDialog.OnDateSetListener date;
+    SimpleDateFormat sdf = new SimpleDateFormat(dateFormat, Locale.GERMAN);
 
     // variables to save after rotation
-    private EditText nameA;
-    private EditText nameB;
-    private TextView scoreTeamA;
-    private TextView yellowTeamA;
-    private TextView redTeamA;
-    private TextView scoreTeamB;
-    private TextView yellowTeamB;
-    private TextView redTeamB;
+    EditText nameA;
+    EditText nameB;
+    TextView scoreTeamA;
+    TextView yellowTeamA;
+    TextView redTeamA;
+    TextView scoreTeamB;
+    TextView yellowTeamB;
+    TextView redTeamB;
 
     //sounds
-    private MediaPlayer soundGoal;
-    private MediaPlayer soundYellow;
-    private MediaPlayer soundRed;
+    MediaPlayer soundGoal;
+    MediaPlayer soundYellow;
+    MediaPlayer soundRed;
 
     private static String SCORE_A = "goalsA";
     private static String YELLOW_A = "yellowA";
@@ -57,7 +57,7 @@ public class MainActivity extends AppCompatActivity {
     private static String YELLOW_B = "yellowB";
     private static String RED_B = "redB";
 
-    private boolean resetClick = false;
+    boolean resetClick = false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -158,6 +158,7 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onRestoreInstanceState(Bundle savedInstanceState) {
         super.onRestoreInstanceState(savedInstanceState);
+
         scoreTeamA.setText(savedInstanceState.getString(SCORE_A));
         yellowTeamA.setText(savedInstanceState.getString(YELLOW_A));
         redTeamA.setText(savedInstanceState.getString(RED_A));
@@ -169,53 +170,57 @@ public class MainActivity extends AppCompatActivity {
     /**
      * Below methods add goals to score and cards to cards counter.
      */
-    public void addGoal(View v) {
+    public void addGoal(View v){
         soundGoal.start();
-        String teamName = v.getTag().toString();
-        if (teamName.equals(getString(R.string.team_a))) {
-            // checks the number of goals after rotation (saved in a string) and changes it back to integer
-            String goalsA = scoreTeamA.getText().toString();
-            scoreA = Integer.parseInt(goalsA);
-            // adds goals to score
-            scoreA += 1;
-            displayScoreForA(scoreA);
-        } else {
-            String goalsB = scoreTeamB.getText().toString();
-            scoreB = Integer.parseInt(goalsB);
-            scoreB += 1;
-            displayScoreForB(scoreB);
+        switch (v.getId()) {
+            case R.id.goalA_button:
+                String goalsA = scoreTeamA.getText().toString();
+                scoreA = Integer.parseInt(goalsA);
+                scoreA += 1;
+                displayScoreForA(scoreA);
+                break;
+            case R.id.goalB_button:
+                String goalsB = scoreTeamB.getText().toString();
+                scoreB = Integer.parseInt(goalsB);
+                scoreB += 1;
+                displayScoreForB(scoreB);
+                break;
         }
     }
 
     public void addYellowCard(View v) {
         soundYellow.start();
-        String teamName = v.getTag().toString();
-        if (teamName.equals(getString(R.string.team_a))) {
-            String yellowCardsA = yellowTeamA.getText().toString();
-            yellowCardsForA = Integer.parseInt(yellowCardsA);
-            yellowCardsForA += 1;
-            displayYellowCardsForA(yellowCardsForA);
-        } else {
-            String yellowCardsB = yellowTeamB.getText().toString();
-            yellowCardsForB = Integer.parseInt(yellowCardsB);
-            yellowCardsForB += 1;
-            displayYellowCardsForB(yellowCardsForB);
+        switch (v.getId()) {
+            case R.id.yellowA_button:
+                String yellowCardsA = yellowTeamA.getText().toString();
+                yellowCardsForA = Integer.parseInt(yellowCardsA);
+                yellowCardsForA += 1;
+                displayYellowCardsForA(yellowCardsForA);
+                break;
+            case R.id.yellowB_button:
+                String yellowCardsB = yellowTeamB.getText().toString();
+                yellowCardsForB = Integer.parseInt(yellowCardsB);
+                yellowCardsForB += 1;
+                displayYellowCardsForB(yellowCardsForB);
+                break;
         }
     }
 
     public void addRedCard(View v) {
         soundRed.start();
-        String teamName = v.getTag().toString();
-        if (teamName.equals(getString(R.string.team_a))) {
-            String redCardsA = redTeamA.getText().toString();
-            redCardsForA = Integer.parseInt(redCardsA);
-            redCardsForA += 1;
-            displayRedCardsForA(redCardsForA);
-        } else {
-            String redCardsB = redTeamB.getText().toString();
-            redCardsForB = Integer.parseInt(redCardsB);
-            redCardsForB += 1;
-            displayRedCardsForB(redCardsForB);
+        switch (v.getId()) {
+            case R.id.redA_button:
+                String redCardsA = redTeamA.getText().toString();
+                redCardsForA = Integer.parseInt(redCardsA);
+                redCardsForA += 1;
+                displayRedCardsForA(redCardsForA);
+                break;
+            case R.id.redB_button:
+                String redCardsB = redTeamB.getText().toString();
+                redCardsForB = Integer.parseInt(redCardsB);
+                redCardsForB += 1;
+                displayRedCardsForB(redCardsForB);
+                break;
         }
     }
 

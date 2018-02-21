@@ -39,8 +39,7 @@
                 <Button
                     android:id="@+id/goalA_button"
                     style="@style/ButtonsGoal"
-                    android:onClick="addGoal"
-                    android:tag="@string/team_a" />
+                    android:onClick="addGoal" />
 
                 <LinearLayout style="@style/CardsLayout">
 
@@ -49,7 +48,6 @@
                         style="@style/ButtonsSmaller.Left"
                         android:background="@color/yellowButton"
                         android:onClick="addYellowCard"
-                        android:tag="@string/team_a"
                         android:text="@string/yellow_card"
                         android:textColor="@color/yellowButtonText" />
 
@@ -65,7 +63,6 @@
                         style="@style/ButtonsSmaller.Left"
                         android:background="@color/redButton"
                         android:onClick="addRedCard"
-                        android:tag="@string/team_a"
                         android:text="@string/red_card" />
 
                     <TextView
@@ -94,8 +91,7 @@
                 <Button
                     android:id="@+id/goalB_button"
                     style="@style/ButtonsGoal"
-                    android:onClick="addGoal"
-                    android:tag="@string/team_b" />
+                    android:onClick="addGoal" />
 
                 <LinearLayout style="@style/CardsLayout">
 
@@ -108,7 +104,6 @@
                         style="@style/ButtonsSmaller.Right"
                         android:background="@color/yellowButton"
                         android:onClick="addYellowCard"
-                        android:tag="@string/team_b"
                         android:text="@string/yellow_card"
                         android:textColor="@color/yellowButtonText" />
                 </LinearLayout>
@@ -124,7 +119,6 @@
                         style="@style/ButtonsSmaller.Right"
                         android:background="@color/redButton"
                         android:onClick="addRedCard"
-                        android:tag="@string/team_b"
                         android:text="@string/red_card" />
                 </LinearLayout>
             </LinearLayout>
