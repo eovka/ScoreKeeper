@@ -28,27 +28,27 @@ public class MainActivity extends AppCompatActivity {
     private int redCardsForB = 0;
 
     // all needed to set the date
-    Context context = this;
-    EditText dateField;
-    Calendar myCalendar = Calendar.getInstance();
-    String dateFormat = "dd.MM.yyyy";
-    DatePickerDialog.OnDateSetListener date;
-    SimpleDateFormat sdf = new SimpleDateFormat(dateFormat, Locale.GERMAN);
+    private Context context = this;
+    private EditText dateField;
+    private Calendar myCalendar = Calendar.getInstance();
+    private String dateFormat = "dd.MM.yyyy";
+    private DatePickerDialog.OnDateSetListener date;
+    private SimpleDateFormat sdf = new SimpleDateFormat(dateFormat, Locale.GERMAN);
 
     // variables to save after rotation
-    EditText nameA;
-    EditText nameB;
-    TextView scoreTeamA;
-    TextView yellowTeamA;
-    TextView redTeamA;
-    TextView scoreTeamB;
-    TextView yellowTeamB;
-    TextView redTeamB;
+    private EditText nameA;
+    private EditText nameB;
+    private TextView scoreTeamA;
+    private TextView yellowTeamA;
+    private TextView redTeamA;
+    private TextView scoreTeamB;
+    private TextView yellowTeamB;
+    private TextView redTeamB;
 
     //sounds
-    MediaPlayer soundGoal;
-    MediaPlayer soundYellow;
-    MediaPlayer soundRed;
+    private MediaPlayer soundGoal;
+    private MediaPlayer soundYellow;
+    private MediaPlayer soundRed;
 
     private static String SCORE_A = "goalsA";
     private static String YELLOW_A = "yellowA";
@@ -57,7 +57,7 @@ public class MainActivity extends AppCompatActivity {
     private static String YELLOW_B = "yellowB";
     private static String RED_B = "redB";
 
-    boolean resetClick = false;
+    private boolean resetClick = false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -158,7 +158,6 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onRestoreInstanceState(Bundle savedInstanceState) {
         super.onRestoreInstanceState(savedInstanceState);
-
         scoreTeamA.setText(savedInstanceState.getString(SCORE_A));
         yellowTeamA.setText(savedInstanceState.getString(YELLOW_A));
         redTeamA.setText(savedInstanceState.getString(RED_A));
