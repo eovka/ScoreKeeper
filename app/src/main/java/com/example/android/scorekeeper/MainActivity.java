@@ -265,7 +265,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     /**
-     * Displays the yellow cards for Team B.
+     * Displays the red cards for Team B.
      */
     public void displayRedCardsForB(int score) {
         redTeamB = findViewById(R.id.team_b_redcards);
