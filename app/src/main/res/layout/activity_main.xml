@@ -1,144 +1,147 @@
-<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:background="@drawable/soccer_field_photo_2"
     tools:context="com.example.android.scorekeeper.MainActivity">
 
-    <RelativeLayout
+    <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="match_parent"
+        android:background="@drawable/soccer_field_photo_2">
 
-        <EditText
-            android:id="@+id/date"
-            style="@style/EditFields"
-            android:focusable="false"
-            android:hint="@string/date_hint"
-            android:inputType="date"
-            android:padding="@dimen/bigger_space" />
-
-        <LinearLayout
-            android:id="@+id/scores_layout"
+        <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_below="@id/date"
-            android:layout_marginBottom="@dimen/normal_space"
-            android:orientation="horizontal">
+            android:layout_height="wrap_content">
 
-            <LinearLayout style="@style/TeamsLayout">
+            <EditText
+                android:id="@+id/date"
+                style="@style/EditFields"
+                android:focusable="false"
+                android:hint="@string/date_hint"
+                android:inputType="date"
+                android:padding="@dimen/bigger_space" />
 
-                <EditText
-                    android:id="@+id/team_a_name"
-                    style="@style/EditFields.TeamsName"
-                    android:hint="@string/team_a_name_hint" />
+            <LinearLayout
+                android:id="@+id/scores_layout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/date"
+                android:layout_marginBottom="@dimen/normal_space"
+                android:orientation="horizontal">
 
-                <TextView
-                    android:id="@+id/team_a_score"
-                    style="@style/GoalScore" />
+                <LinearLayout style="@style/TeamsLayout">
 
-                <Button
-                    android:id="@+id/goalA_button"
-                    style="@style/ButtonsGoal"
-                    android:onClick="addGoal" />
-
-                <LinearLayout style="@style/CardsLayout">
-
-                    <Button
-                        android:id="@+id/yellowA_button"
-                        style="@style/ButtonsSmaller.Left"
-                        android:background="@color/yellowButton"
-                        android:onClick="addYellowCard"
-                        android:text="@string/yellow_card"
-                        android:textColor="@color/yellowButtonText" />
+                    <EditText
+                        android:id="@+id/team_a_name"
+                        style="@style/EditFields.TeamsName"
+                        android:hint="@string/team_a_name_hint" />
 
                     <TextView
-                        android:id="@+id/team_a_yellowcards"
-                        style="@style/CardsScore.Left" />
+                        android:id="@+id/team_a_score"
+                        style="@style/GoalScore" />
+
+                    <Button
+                        android:id="@+id/goalA_button"
+                        style="@style/ButtonsGoal"
+                        android:onClick="addGoal" />
+
+                    <LinearLayout style="@style/CardsLayout">
+
+                        <Button
+                            android:id="@+id/yellowA_button"
+                            style="@style/ButtonsSmaller.Left"
+                            android:background="@color/yellowButton"
+                            android:onClick="addYellowCard"
+                            android:text="@string/yellow_card"
+                            android:textColor="@color/yellowButtonText" />
+
+                        <TextView
+                            android:id="@+id/team_a_yellowcards"
+                            style="@style/CardsScore.Left" />
+                    </LinearLayout>
+
+                    <LinearLayout style="@style/CardsLayout">
+
+                        <Button
+                            android:id="@+id/redA_button"
+                            style="@style/ButtonsSmaller.Left"
+                            android:background="@color/redButton"
+                            android:onClick="addRedCard"
+                            android:text="@string/red_card" />
+
+                        <TextView
+                            android:id="@+id/team_a_redcards"
+                            style="@style/CardsScore.Left" />
+                    </LinearLayout>
                 </LinearLayout>
 
-                <LinearLayout style="@style/CardsLayout">
+                <View
+                    android:layout_width="@dimen/line_size"
+                    android:layout_height="match_parent"
+                    android:layout_marginTop="@dimen/bigger_space"
+                    android:background="@color/colorPrimary" />
 
-                    <Button
-                        android:id="@+id/redA_button"
-                        style="@style/ButtonsSmaller.Left"
-                        android:background="@color/redButton"
-                        android:onClick="addRedCard"
-                        android:text="@string/red_card" />
+                <LinearLayout style="@style/TeamsLayout">
+
+                    <EditText
+                        android:id="@+id/team_b_name"
+                        style="@style/EditFields.TeamsName"
+                        android:hint="@string/team_b_name_hint" />
 
                     <TextView
-                        android:id="@+id/team_a_redcards"
-                        style="@style/CardsScore.Left" />
+                        android:id="@+id/team_b_score"
+                        style="@style/GoalScore" />
+
+                    <Button
+                        android:id="@+id/goalB_button"
+                        style="@style/ButtonsGoal"
+                        android:onClick="addGoal" />
+
+                    <LinearLayout style="@style/CardsLayout">
+
+                        <TextView
+                            android:id="@+id/team_b_yellowcards"
+                            style="@style/CardsScore.Right" />
+
+                        <Button
+                            android:id="@+id/yellowB_button"
+                            style="@style/ButtonsSmaller.Right"
+                            android:background="@color/yellowButton"
+                            android:onClick="addYellowCard"
+                            android:text="@string/yellow_card"
+                            android:textColor="@color/yellowButtonText" />
+                    </LinearLayout>
+
+                    <LinearLayout style="@style/CardsLayout">
+
+                        <TextView
+                            android:id="@+id/team_b_redcards"
+                            style="@style/CardsScore.Right" />
+
+                        <Button
+                            android:id="@+id/redB_button"
+                            style="@style/ButtonsSmaller.Right"
+                            android:background="@color/redButton"
+                            android:onClick="addRedCard"
+                            android:text="@string/red_card" />
+                    </LinearLayout>
                 </LinearLayout>
             </LinearLayout>
 
-            <View
-                android:layout_width="@dimen/line_size"
-                android:layout_height="match_parent"
-                android:layout_marginTop="@dimen/bigger_space"
-                android:background="@color/colorPrimary" />
+            <Button
+                android:id="@+id/send_email_button"
+                style="@style/ButtonsGreenSmaller"
+                android:layout_below="@id/scores_layout"
+                android:layout_margin="@dimen/normal_space"
+                android:onClick="sendMail"
+                android:text="@string/send_mail" />
 
-            <LinearLayout style="@style/TeamsLayout">
-
-                <EditText
-                    android:id="@+id/team_b_name"
-                    style="@style/EditFields.TeamsName"
-                    android:hint="@string/team_b_name_hint" />
-
-                <TextView
-                    android:id="@+id/team_b_score"
-                    style="@style/GoalScore" />
-
-                <Button
-                    android:id="@+id/goalB_button"
-                    style="@style/ButtonsGoal"
-                    android:onClick="addGoal" />
-
-                <LinearLayout style="@style/CardsLayout">
-
-                    <TextView
-                        android:id="@+id/team_b_yellowcards"
-                        style="@style/CardsScore.Right" />
-
-                    <Button
-                        android:id="@+id/yellowB_button"
-                        style="@style/ButtonsSmaller.Right"
-                        android:background="@color/yellowButton"
-                        android:onClick="addYellowCard"
-                        android:text="@string/yellow_card"
-                        android:textColor="@color/yellowButtonText" />
-                </LinearLayout>
-
-                <LinearLayout style="@style/CardsLayout">
-
-                    <TextView
-                        android:id="@+id/team_b_redcards"
-                        style="@style/CardsScore.Right" />
-
-                    <Button
-                        android:id="@+id/redB_button"
-                        style="@style/ButtonsSmaller.Right"
-                        android:background="@color/redButton"
-                        android:onClick="addRedCard"
-                        android:text="@string/red_card" />
-                </LinearLayout>
-            </LinearLayout>
-        </LinearLayout>
-
-        <Button
-            android:id="@+id/send_email_button"
-            style="@style/ButtonsGreenSmaller"
-            android:layout_below="@id/scores_layout"
-            android:layout_margin="@dimen/normal_space"
-            android:onClick="sendMail"
-            android:text="@string/send_mail" />
-
-        <Button
-            android:id="@+id/reset_button"
-            style="@style/ButtonsGreenSmaller"
-            android:layout_below="@id/send_email_button"
-            android:layout_marginBottom="@dimen/double_space"
-            android:background="@color/colorAccent"
-            android:onClick="resetScore"
-            android:text="@string/reset" />
-    </RelativeLayout>
-</ScrollView>
+            <Button
+                android:id="@+id/reset_button"
+                style="@style/ButtonsGreenSmaller"
+                android:layout_below="@id/send_email_button"
+                android:layout_marginBottom="@dimen/double_space"
+                android:background="@color/colorAccent"
+                android:onClick="resetScore"
+                android:text="@string/reset" />
+        </RelativeLayout>
+    </ScrollView>
+</layout>
