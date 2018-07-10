@@ -4,6 +4,7 @@ import android.app.DatePickerDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.databinding.DataBindingUtil;
+import android.media.AudioManager;
 import android.media.MediaPlayer;
 import android.net.Uri;
 import android.support.v7.app.AppCompatActivity;
@@ -22,6 +23,8 @@ import java.util.Calendar;
 
 public class MainActivity extends AppCompatActivity {
     ActivityMainBinding bind;
+    private MediaPlayer mediaPlayer;
+    private AudioManager audioManager;
     private int scoreA = 0;
     private int yellowCardsForA = 0;
     private int redCardsForA = 0;
@@ -36,11 +39,6 @@ public class MainActivity extends AppCompatActivity {
     DatePickerDialog.OnDateSetListener date;
     SimpleDateFormat sdf = new SimpleDateFormat(dateFormat, Locale.GERMAN);
 
-    //sounds
-    MediaPlayer soundGoal;
-    MediaPlayer soundYellow;
-    MediaPlayer soundRed;
-
     private static String SCORE_A = "goalsA";
     private static String YELLOW_A = "yellowA";
     private static String RED_A = "redA";
@@ -49,6 +47,30 @@ public class MainActivity extends AppCompatActivity {
     private static String RED_B = "redB";
 
     boolean resetClick = false;
+
+    AudioManager.OnAudioFocusChangeListener focusChangeListener = new AudioManager.OnAudioFocusChangeListener() {
+        @Override
+        public void onAudioFocusChange(int focusChange) {
+            switch (focusChange) {
+                case AudioManager.AUDIOFOCUS_GAIN:
+                    mediaPlayer.start();
+                    break;
+                case AudioManager.AUDIOFOCUS_LOSS:
+                case AudioManager.AUDIOFOCUS_LOSS_TRANSIENT:
+                case AudioManager.AUDIOFOCUS_LOSS_TRANSIENT_CAN_DUCK:
+                    mediaPlayer.stop();
+                    releaseMediaPlayer();
+                    break;
+            }
+        }
+    };
+
+    private MediaPlayer.OnCompletionListener completionListener = new MediaPlayer.OnCompletionListener() {
+        @Override
+        public void onCompletion(MediaPlayer mp) {
+            releaseMediaPlayer();
+        }
+    };
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -62,10 +84,7 @@ public class MainActivity extends AppCompatActivity {
         displayRedCardsForA(0);
         displayRedCardsForB(0);
 
-        // find all the sounds to play
-        soundGoal = MediaPlayer.create(this, R.raw.goalsound);
-        soundYellow = MediaPlayer.create(this, R.raw.shortwhistle);
-        soundRed = MediaPlayer.create(this, R.raw.refereewhistle);
+        audioManager = (AudioManager)getSystemService(Context.AUDIO_SERVICE);
 
         if (savedInstanceState != null) {
             CharSequence savedScoreA = savedInstanceState.getCharSequence(SCORE_A);
@@ -86,8 +105,8 @@ public class MainActivity extends AppCompatActivity {
         // http://www.moo-code.me/en/2017/04/16/how-to-popup-datepicker-calendar/
 
         // calendar on create - set date to current date
-        long currentdate = System.currentTimeMillis();
-        String dateString = sdf.format(currentdate);
+        long currentDate = System.currentTimeMillis();
+        String dateString = sdf.format(currentDate);
         bind.date.setText(dateString);
 
         // change the date and update dateField
@@ -146,8 +165,8 @@ public class MainActivity extends AppCompatActivity {
         bind.teamBRedcards.setText(savedInstanceState.getString(RED_B));
     }
 
-    public void addGoal(View v){
-        soundGoal.start();
+    public void addGoal(View v) {
+        createMediaPlayer(R.raw.goalsound);
         switch (v.getId()) {
             case R.id.goalA_button:
                 String goalsA = bind.teamAScore.getText().toString();
@@ -165,7 +184,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void addYellowCard(View v) {
-        soundYellow.start();
+        createMediaPlayer(R.raw.shortwhistle);
         switch (v.getId()) {
             case R.id.yellowA_button:
                 String yellowCardsA = bind.teamAYellowcards.getText().toString();
@@ -183,7 +202,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void addRedCard(View v) {
-        soundRed.start();
+        createMediaPlayer(R.raw.refereewhistle);
         switch (v.getId()) {
             case R.id.redA_button:
                 String redCardsA = bind.teamARedcards.getText().toString();
@@ -203,18 +222,23 @@ public class MainActivity extends AppCompatActivity {
     public void displayScoreForA(int score) {
         bind.teamAScore.setText(String.valueOf(score));
     }
+
     public void displayYellowCardsForA(int score) {
         bind.teamAYellowcards.setText(String.valueOf(score));
     }
+
     public void displayRedCardsForA(int score) {
         bind.teamARedcards.setText(String.valueOf(score));
     }
+
     public void displayScoreForB(int score) {
         bind.teamBScore.setText(String.valueOf(score));
     }
+
     public void displayYellowCardsForB(int score) {
         bind.teamBYellowcards.setText(String.valueOf(score));
     }
+
     public void displayRedCardsForB(int score) {
         bind.teamBRedcards.setText(String.valueOf(score));
     }
@@ -236,30 +260,25 @@ public class MainActivity extends AppCompatActivity {
         String yellowA = bind.teamAYellowcards.getText().toString();
         String redB = bind.teamBRedcards.getText().toString();
         String yellowB = bind.teamBYellowcards.getText().toString();
-        String scoreMessage = createMatchSummary(date, teamA, teamB, scoreA, scoreB, redA, yellowA, redB, yellowB);
 
         // Create e-mail and set intent to mail app.
         Intent intent = new Intent(Intent.ACTION_SENDTO);
         intent.setData(Uri.parse("mailto:"));
         intent.putExtra(Intent.EXTRA_SUBJECT, teamA + getString(R.string.versus) + teamB + getString(R.string.emdash) + getString(R.string.email_subject));
-        intent.putExtra(Intent.EXTRA_TEXT, scoreMessage);
+        intent.putExtra(Intent.EXTRA_TEXT, createMatchSummary(date, teamA, teamB, scoreA, scoreB, redA, yellowA, redB, yellowB));
         if (intent.resolveActivity(getPackageManager()) != null) {
             startActivity(intent);
         }
     }
 
     private String createMatchSummary(String date, String nameA, String nameB, String goalsA, String goalsB, String redCardsA, String yellowCardsA, String redCardsB, String yellowCardsB) {
-        String matchSummary = nameA + getString(R.string.emdash) + nameB;
-        matchSummary += "\n" + goalsA + getString(R.string.emdash) + goalsB;
-        matchSummary += "\n";
-        matchSummary += "\n" + getString(R.string.red_cards_info) + nameA + ": " + redCardsA;
-        matchSummary += "\n" + getString(R.string.yellow_cards_info) + nameA + ": " + yellowCardsA;
-        matchSummary += "\n";
-        matchSummary += "\n" + getString(R.string.red_cards_info) + nameB + ": " + redCardsB;
-        matchSummary += "\n" + getString(R.string.yellow_cards_info) + nameB + ": " + yellowCardsB;
-        matchSummary += "\n";
-        matchSummary += "\n" + getString(R.string.match_time_info) + date + ".";
-        return matchSummary;
+        return nameA + getString(R.string.emdash) + nameB + "\n" +
+                goalsA + getString(R.string.emdash) + goalsB + "\n\n" +
+                getString(R.string.red_cards_info) + nameA + ": " + redCardsA + "\n" +
+                getString(R.string.yellow_cards_info) + nameA + ": " + yellowCardsA + "\n\n" +
+                getString(R.string.red_cards_info) + nameB + ": " + redCardsB + "\n" +
+                getString(R.string.yellow_cards_info) + nameB + ": " + yellowCardsB + "\n\n" +
+                getString(R.string.match_time_info) + date + ".";
     }
 
     public void resetScore(View v) {
@@ -290,5 +309,21 @@ public class MainActivity extends AppCompatActivity {
 
     public void displayResetWarning(String warningReset) {
         Toast.makeText(getApplicationContext(), warningReset, Toast.LENGTH_SHORT).show();
+    }
+
+    private void createMediaPlayer(int soundId) {
+        int result = audioManager.requestAudioFocus(focusChangeListener, AudioManager.STREAM_MUSIC, AudioManager.AUDIOFOCUS_GAIN_TRANSIENT);
+        if (result == AudioManager.AUDIOFOCUS_REQUEST_GRANTED) {
+            mediaPlayer = MediaPlayer.create(this, soundId);
+            mediaPlayer.start();
+            mediaPlayer.setOnCompletionListener(completionListener);
+        }
+    }
+    private void releaseMediaPlayer() {
+        if (mediaPlayer != null) {
+            mediaPlayer.release();
+            mediaPlayer = null;
+            audioManager.abandonAudioFocus(focusChangeListener);
+        }
     }
 }
