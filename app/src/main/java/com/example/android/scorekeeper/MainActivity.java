@@ -1,6 +1,7 @@
 package com.example.android.scorekeeper;
 
 import android.app.DatePickerDialog;
+import android.arch.lifecycle.ViewModelProviders;
 import android.content.Context;
 import android.content.Intent;
 import android.databinding.DataBindingUtil;
@@ -23,14 +24,9 @@ import java.util.Calendar;
 
 public class MainActivity extends AppCompatActivity {
     ActivityMainBinding bind;
+    ScoreViewModel viewModel;
     private MediaPlayer mediaPlayer;
     private AudioManager audioManager;
-    private int scoreA = 0;
-    private int yellowCardsForA = 0;
-    private int redCardsForA = 0;
-    private int scoreB = 0;
-    private int yellowCardsForB = 0;
-    private int redCardsForB = 0;
 
     // all needed to set the date
     Context context = this;
@@ -77,34 +73,27 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         bind = DataBindingUtil.setContentView(this, R.layout.activity_main);
 
-        displayScoreForA(0);
-        displayScoreForB(0);
-        displayYellowCardsForA(0);
-        displayYellowCardsForB(0);
-        displayRedCardsForA(0);
-        displayRedCardsForB(0);
+        viewModel = ViewModelProviders.of(this).get(ScoreViewModel.class);
+
+        displayScoreForA(viewModel.getScoreA());
+        displayScoreForB(viewModel.getScoreB());
+        displayYellowCardsForA(viewModel.getYellowA());
+        displayYellowCardsForB(viewModel.getYellowB());
+        displayRedCardsForA(viewModel.getRedA());
+        displayRedCardsForB(viewModel.getRedB());
 
         audioManager = (AudioManager)getSystemService(Context.AUDIO_SERVICE);
 
         if (savedInstanceState != null) {
-            CharSequence savedScoreA = savedInstanceState.getCharSequence(SCORE_A);
-            bind.teamAScore.setText(savedScoreA);
-            CharSequence savedYellowA = savedInstanceState.getCharSequence(YELLOW_A);
-            bind.teamAYellowcards.setText(savedYellowA);
-            CharSequence savedRedA = savedInstanceState.getCharSequence(RED_A);
-            bind.teamARedcards.setText(savedRedA);
-            CharSequence savedScoreB = savedInstanceState.getCharSequence(SCORE_B);
-            bind.teamBScore.setText(savedScoreB);
-            CharSequence savedYellowB = savedInstanceState.getCharSequence(YELLOW_B);
-            bind.teamBYellowcards.setText(savedYellowB);
-            CharSequence savedRedB = savedInstanceState.getCharSequence(RED_B);
-            bind.teamBRedcards.setText(savedRedB);
+            bind.teamAScore.setText(savedInstanceState.getString(SCORE_A));
+            bind.teamAYellowcards.setText(savedInstanceState.getString(YELLOW_A));
+            bind.teamARedcards.setText(savedInstanceState.getString(RED_A));
+            bind.teamBScore.setText(savedInstanceState.getString(SCORE_B));
+            bind.teamBYellowcards.setText(savedInstanceState.getString(YELLOW_B));
+            bind.teamBRedcards.setText(savedInstanceState.getString(RED_B));
         }
 
-        // The below code which sets the current date and allows to pick another date written with help:
-        // http://www.moo-code.me/en/2017/04/16/how-to-popup-datepicker-calendar/
-
-        // calendar on create - set date to current date
+        // Set the current date and allows to pick another date
         long currentDate = System.currentTimeMillis();
         String dateString = sdf.format(currentDate);
         bind.date.setText(dateString);
@@ -126,8 +115,8 @@ public class MainActivity extends AppCompatActivity {
         bind.date.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                new DatePickerDialog(context, date, myCalendar
-                        .get(Calendar.YEAR), myCalendar.get(Calendar.MONTH),
+                new DatePickerDialog(context, date, myCalendar.get(Calendar.YEAR),
+                        myCalendar.get(Calendar.MONTH),
                         myCalendar.get(Calendar.DAY_OF_MONTH)).show();
             }
         });
@@ -140,19 +129,19 @@ public class MainActivity extends AppCompatActivity {
         bind.date.setText(sdf.format(myCalendar.getTime()));
     }
 
-    // saving number of goals and cards before rotation
+    // saving number of goals and cards before going to background
     @Override
     protected void onSaveInstanceState(Bundle outState) {
         super.onSaveInstanceState(outState);
-        outState.putCharSequence(SCORE_A, bind.teamAScore.getText());
-        outState.putCharSequence(YELLOW_A, bind.teamAYellowcards.getText());
-        outState.putCharSequence(RED_A, bind.teamARedcards.getText());
-        outState.putCharSequence(SCORE_B, bind.teamBScore.getText());
-        outState.putCharSequence(YELLOW_B, bind.teamBYellowcards.getText());
-        outState.putCharSequence(RED_B, bind.teamBRedcards.getText());
+        outState.putString(SCORE_A, bind.teamAScore.getText().toString());
+        outState.putString(YELLOW_A, bind.teamAYellowcards.getText().toString());
+        outState.putString(RED_A, bind.teamARedcards.getText().toString());
+        outState.putString(SCORE_B, bind.teamBScore.getText().toString());
+        outState.putString(YELLOW_B, bind.teamBYellowcards.getText().toString());
+        outState.putString(RED_B, bind.teamBRedcards.getText().toString());
     }
 
-    // restoring number of goals and cards after rotation
+    // restoring number of goals and cards after coming back from background
     @Override
     protected void onRestoreInstanceState(Bundle savedInstanceState) {
         super.onRestoreInstanceState(savedInstanceState);
@@ -169,16 +158,10 @@ public class MainActivity extends AppCompatActivity {
         createMediaPlayer(R.raw.goalsound);
         switch (v.getId()) {
             case R.id.goalA_button:
-                String goalsA = bind.teamAScore.getText().toString();
-                scoreA = Integer.parseInt(goalsA);
-                scoreA += 1;
-                displayScoreForA(scoreA);
+                displayScoreForA(viewModel.getScoreA() + 1);
                 break;
             case R.id.goalB_button:
-                String goalsB = bind.teamBScore.getText().toString();
-                scoreB = Integer.parseInt(goalsB);
-                scoreB += 1;
-                displayScoreForB(scoreB);
+                displayScoreForB(viewModel.getScoreB() + 1);
                 break;
         }
     }
@@ -187,16 +170,10 @@ public class MainActivity extends AppCompatActivity {
         createMediaPlayer(R.raw.shortwhistle);
         switch (v.getId()) {
             case R.id.yellowA_button:
-                String yellowCardsA = bind.teamAYellowcards.getText().toString();
-                yellowCardsForA = Integer.parseInt(yellowCardsA);
-                yellowCardsForA += 1;
-                displayYellowCardsForA(yellowCardsForA);
+                displayYellowCardsForA(viewModel.getYellowA() + 1);
                 break;
             case R.id.yellowB_button:
-                String yellowCardsB = bind.teamBYellowcards.getText().toString();
-                yellowCardsForB = Integer.parseInt(yellowCardsB);
-                yellowCardsForB += 1;
-                displayYellowCardsForB(yellowCardsForB);
+                displayYellowCardsForB(viewModel.getYellowB() + 1);
                 break;
         }
     }
@@ -205,42 +182,42 @@ public class MainActivity extends AppCompatActivity {
         createMediaPlayer(R.raw.refereewhistle);
         switch (v.getId()) {
             case R.id.redA_button:
-                String redCardsA = bind.teamARedcards.getText().toString();
-                redCardsForA = Integer.parseInt(redCardsA);
-                redCardsForA += 1;
-                displayRedCardsForA(redCardsForA);
+                displayRedCardsForA(viewModel.getRedA() + 1);
                 break;
             case R.id.redB_button:
-                String redCardsB = bind.teamBRedcards.getText().toString();
-                redCardsForB = Integer.parseInt(redCardsB);
-                redCardsForB += 1;
-                displayRedCardsForB(redCardsForB);
+                displayRedCardsForB(viewModel.getRedB() + 1);
                 break;
         }
     }
 
-    public void displayScoreForA(int score) {
-        bind.teamAScore.setText(String.valueOf(score));
+    public void displayScoreForA(int scoreA) {
+        viewModel.setScoreA(scoreA);
+        bind.teamAScore.setText(String.valueOf(scoreA));
     }
 
-    public void displayYellowCardsForA(int score) {
-        bind.teamAYellowcards.setText(String.valueOf(score));
+    public void displayYellowCardsForA(int yellowA) {
+        viewModel.setYellowA(yellowA);
+        bind.teamAYellowcards.setText(String.valueOf(yellowA));
     }
 
-    public void displayRedCardsForA(int score) {
-        bind.teamARedcards.setText(String.valueOf(score));
+    public void displayRedCardsForA(int redA) {
+        viewModel.setRedA(redA);
+        bind.teamARedcards.setText(String.valueOf(redA));
     }
 
-    public void displayScoreForB(int score) {
-        bind.teamBScore.setText(String.valueOf(score));
+    public void displayScoreForB(int scoreB) {
+        viewModel.setScoreB(scoreB);
+        bind.teamBScore.setText(String.valueOf(scoreB));
     }
 
-    public void displayYellowCardsForB(int score) {
-        bind.teamBYellowcards.setText(String.valueOf(score));
+    public void displayYellowCardsForB(int yellowB) {
+        viewModel.setYellowB(yellowB);
+        bind.teamBYellowcards.setText(String.valueOf(yellowB));
     }
 
-    public void displayRedCardsForB(int score) {
-        bind.teamBRedcards.setText(String.valueOf(score));
+    public void displayRedCardsForB(int redB) {
+        viewModel.setRedB(redB);
+        bind.teamBRedcards.setText(String.valueOf(redB));
     }
 
     public void sendMail(View view) {
@@ -288,18 +265,12 @@ public class MainActivity extends AppCompatActivity {
             resetButton.setBackgroundColor(getResources().getColor(R.color.colorButton));
             resetClick = true;
         } else {
-            scoreA = 0;
-            yellowCardsForA = 0;
-            redCardsForA = 0;
-            scoreB = 0;
-            yellowCardsForB = 0;
-            redCardsForB = 0;
-            displayScoreForA(scoreA);
-            displayYellowCardsForA(yellowCardsForA);
-            displayRedCardsForA(redCardsForA);
-            displayScoreForB(scoreB);
-            displayYellowCardsForB(yellowCardsForB);
-            displayRedCardsForB(redCardsForB);
+            displayScoreForA(0);
+            displayYellowCardsForA(0);
+            displayRedCardsForA(0);
+            displayScoreForB(0);
+            displayYellowCardsForB(0);
+            displayRedCardsForB(0);
             bind.teamAName.getText().clear();
             bind.teamBName.getText().clear();
             resetButton.setBackgroundColor(getResources().getColor(R.color.colorAccent));
